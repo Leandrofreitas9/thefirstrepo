@@ -1,0 +1,25 @@
+#setting up working environment
+#download spaCy lib
+#Tokenization
+import spacy
+
+nlp = spacy.load('en')
+doc = nlp(u'I am flying to Frisco')
+print([w.text for w in doc])
+#Lemmatization
+import spacy
+
+nlp = spacy.load('en')
+doc = nlp(u'this product integrates both libraries for downloading and applying patches')
+for token in doc:
+    print(token.text, token.lemma)
+#implementing lemmatization
+import spacy
+from spacy.symbols import LEMMA, ORTH
+
+nlp = spacy.load('en')
+doc = nlp(u'I am flying to Frisco')
+print([w.text for w in doc])
+special_case = [{ORTH: u'Frisco', LEMMA: u'San Francisco'}]
+nlp.tokenizer.add_special_case(u'Frisco', special_case)
+print([w.lemma_ for w in nlp(u'I am flying to Frisco')])
